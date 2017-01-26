@@ -19,3 +19,11 @@ Dr. Yu has provided me with commands to get into the MySQL (Server?) for now. I 
 
 Other notes: Moved all ".tbl" files to my directory under "~weatherby/testdata" I anticipate to test 1GB against memory in mySQL and MonetDB. Larger sets of data should be easier to distinguish a proper benchmark.
 Commands to remember: SET default_storage_engine=MEMORY;
+
+**January 26, 2017**
+**1:30 PM to 3:00 PM** Today I have learned how to import data to mySQL from the .TBL files. I have written all the script and laid it out in a text file on the main branch of this repository. I am running into this issues with this now:
+
+mysql> LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINATED BY '|';
+ERROR 1114 (HY000): The table 'lineitem' is full
+
+Will discuss Tuesday about what I'm running into here and how to remedy it. I have tried scaling down the filesizes, but even Aikin's 100m project is too large for this particular table. We are using the memory engine, so maybe that has something to do with it. Tried 1GB, 500MB, 250MB, 200MB, 100MB - I need a fairly sizable project in order to properly benchmark, don't I?
