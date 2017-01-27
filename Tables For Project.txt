@@ -1,3 +1,5 @@
+SET DEFAULT_STORAGE_ENGINE = MEMORY;
+
 customer
 +--------------+---------------+------+-----+---------+-------+
 | Field        | Type          | Null | Key | Default | Extra |
