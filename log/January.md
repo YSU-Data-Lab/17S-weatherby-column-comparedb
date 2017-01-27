@@ -21,6 +21,7 @@ Other notes: Moved all ".tbl" files to my directory under "~weatherby/testdata" 
 Commands to remember: SET default_storage_engine=MEMORY;
 
 **January 26, 2017**
+
 **1:30 PM to 3:00 PM** Today I have learned how to import data to mySQL from the .TBL files. I have written all the script and laid it out in a text file on the main branch of this repository. I am running into this issues with this now:
 
 mysql> LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINATED BY '|';
@@ -28,3 +29,19 @@ mysql> LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINAT
 ERROR 1114 (HY000): The table 'lineitem' is full
 
 Will discuss Tuesday about what I'm running into here and how to remedy it. I have tried scaling down the filesizes, but even Aikin's 100m project is too large for this particular table. We are using the memory engine, so maybe that has something to do with it. Tried 1GB, 500MB, 250MB, 200MB, 100MB - I need a fairly sizable project in order to properly benchmark, don't I?
+
+**January 27, 2017**
+
+**12:15 PM to 1:00 PM** Remedied issue with mySQL and the memory engine limitation with the following commands:
+
+SET GLOBAL tmp_table_size = 1024 * 1024 * 1024 * 2;
+SET GLOBAL max_heap_table_size = 1024 * 1024 * 1024 * 2;
+If you are checking the above variables with
+
+SELECT @@max_heap_table_size;
+or
+SHOW VARIABLES LIKE 'max_heap_table_size';
+
+Also looked at the queries with qgen for testing within the ~/tpch/dbgen/queries/ directory. Plan to have entire benchmark on 750MB of data by the end of January and then begin next step with MonetDB and Cassandra.
+
+**End of Log File**
