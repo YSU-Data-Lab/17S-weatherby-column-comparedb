@@ -44,4 +44,6 @@ SHOW VARIABLES LIKE 'max_heap_table_size';
 
 Also looked at the queries with qgen for testing within the ~/tpch/dbgen/queries/ directory. Plan to have entire benchmark on 750MB of data by the end of January and then begin next step with MonetDB and Cassandra.
 
+Attempted proper benchmarking, unsure about results: Opened Issue #2 Memory == MYISAM Performance
+
 **End of Log File**
