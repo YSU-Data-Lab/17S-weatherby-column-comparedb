@@ -50,4 +50,6 @@ Attempted proper benchmarking, unsure about results: Opened Issue #2 Memory == M
 
 Solved Issue: Memory database and MYISAM seemed to be running at equivalent times. Found that the table setups were missing Primary and Foreign Keys when testing against the queries. The addition of the keys have improved the performance drastically and benchmarks now run as expected.
 
+This was the final hurdle of the first phase of my project.
+
 **End of Log File**
