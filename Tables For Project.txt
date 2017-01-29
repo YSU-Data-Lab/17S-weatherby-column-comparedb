@@ -1,40 +1,42 @@
-SET DEFAULT_STORAGE_ENGINE = MEMORY;
+show tables;
++-------------------------+
+| Tables_in_tpch_mem_750m |
++-------------------------+
+| customer                |
+| lineitem                |
+| nation                  |
+| orders                  |
+| part                    |
+| partsupp                |
+| region                  |
+| supplier                |
++-------------------------+
+8 rows in set (0.00 sec)
 
-customer
+
+show columns from customer; show columns from lineitem; show columns from nation; show columns from orders; show columns from part; show columns from partsupp; show columns from region; show columns from supplier;
+
 +--------------+---------------+------+-----+---------+-------+
 | Field        | Type          | Null | Key | Default | Extra |
 +--------------+---------------+------+-----+---------+-------+
-| C_CUSTKEY    | int(11)       | NO   |     | NULL    |       |
+| C_CUSTKEY    | int(11)       | NO   | PRI | NULL    |       |
 | C_NAME       | varchar(25)   | NO   |     | NULL    |       |
 | C_ADDRESS    | varchar(40)   | NO   |     | NULL    |       |
-| C_NATIONKEY  | int(11)       | NO   |     | NULL    |       |
+| C_NATIONKEY  | int(11)       | NO   | MUL | NULL    |       |
 | C_PHONE      | char(15)      | NO   |     | NULL    |       |
 | C_ACCTBAL    | decimal(15,2) | NO   |     | NULL    |       |
 | C_MKTSEGMENT | char(10)      | NO   |     | NULL    |       |
 | C_COMMENT    | varchar(117)  | NO   |     | NULL    |       |
 +--------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
 
-CREATE TABLE customer
-(C_CUSTKEY int(11) NOT NULL, 
-C_NAME varchar(25) NOT NULL, 
-C_ADDRESS varchar(40) NOT NULL, 
-C_NATIONKEY int(11) NOT NULL, 
-C_PHONE char(15) NOT NULL, 
-C_ACCTBAL decimal(15,2) NOT NULL, 
-C_MKTSEGMENT char(10) NOT NULL, 
-C_COMMENT varchar(117) NOT NULL,
-PRIMARY KEY (C_CUSTKEY));
-
-LOAD DATA LOCAL INFILE 'customer.tbl' INTO TABLE customer FIELDS TERMINATED BY '|';
-
-lineitem
 +-----------------+---------------+------+-----+---------+-------+
 | Field           | Type          | Null | Key | Default | Extra |
 +-----------------+---------------+------+-----+---------+-------+
-| L_ORDERKEY      | int(11)       | NO   |     | NULL    |       |
-| L_PARTKEY       | int(11)       | NO   |     | NULL    |       |
-| L_SUPPKEY       | int(11)       | NO   |     | NULL    |       |
-| L_LINENUMBER    | int(11)       | NO   |     | NULL    |       |
+| L_ORDERKEY      | int(11)       | NO   | PRI | NULL    |       |
+| L_PARTKEY       | int(11)       | NO   | MUL | NULL    |       |
+| L_sUPPKEY       | int(11)       | NO   | MUL | NULL    |       |
+| L_LINENUMBER    | int(11)       | NO   | PRI | NULL    |       |
 | L_QUANTITY      | decimal(15,2) | NO   |     | NULL    |       |
 | L_EXTENDEDPRICE | decimal(15,2) | NO   |     | NULL    |       |
 | L_DISCOUNT      | decimal(15,2) | NO   |     | NULL    |       |
@@ -48,6 +50,92 @@ lineitem
 | L_SHIPMODE      | char(10)      | NO   |     | NULL    |       |
 | L_COMMENT       | varchar(44)   | NO   |     | NULL    |       |
 +-----------------+---------------+------+-----+---------+-------+
+16 rows in set (0.00 sec)
+
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| N_NATIONKEY | int(11)      | NO   | PRI | NULL    |       |
+| N_NAME      | char(25)     | NO   |     | NULL    |       |
+| N_REGIONKEY | int(11)      | NO   | MUL | NULL    |       |
+| N_COMMENT   | varchar(152) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| O_ORDERKEY      | int(11)       | NO   | PRI | NULL    |       |
+| O_CUSTKEY       | int(11)       | NO   | MUL | NULL    |       |
+| O_ORDERSTATUS   | char(1)       | NO   |     | NULL    |       |
+| O_TOTALPRICE    | decimal(15,2) | NO   |     | NULL    |       |
+| O_ORDERDATE     | date          | NO   |     | NULL    |       |
+| O_ORDERPRIORITY | char(15)      | NO   |     | NULL    |       |
+| O_CLERK         | char(15)      | NO   |     | NULL    |       |
+| O_SHIPPRIORITY  | int(11)       | NO   |     | NULL    |       |
+| O_COMMENT       | varchar(79)   | NO   |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| P_PARTKEY     | int(11)       | NO   | PRI | NULL    |       |
+| P_NAME        | varchar(55)   | NO   |     | NULL    |       |
+| P_MFGR        | char(25)      | NO   |     | NULL    |       |
+| P_BRAND       | char(10)      | NO   |     | NULL    |       |
+| P_TYPE        | varchar(25)   | NO   |     | NULL    |       |
+| P_SIZE        | int(11)       | NO   |     | NULL    |       |
+| P_CONTAINER   | char(10)      | NO   |     | NULL    |       |
+| P_RETAILPRICE | decimal(15,2) | NO   |     | NULL    |       |
+| P_COMMENT     | varchar(23)   | NO   |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| PS_PARTKEY    | int(11)       | NO   | PRI | NULL    |       |
+| PS_SUPPKEY    | int(11)       | NO   | PRI | NULL    |       |
+| PS_AVAILQTY   | int(11)       | NO   |     | NULL    |       |
+| PS_SUPPLYCOST | decimal(15,2) | NO   |     | NULL    |       |
+| PS_COMMENT    | varchar(199)  | NO   |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| R_REGIONKEY | int(11)      | NO   | PRI | NULL    |       |
+| R_NAME      | char(25)     | NO   |     | NULL    |       |
+| R_COMMENT   | varchar(152) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| S_SUPPKEY   | int(11)       | NO   | PRI | NULL    |       |
+| S_NAME      | char(25)      | NO   |     | NULL    |       |
+| S_ADDRESS   | varchar(40)   | NO   |     | NULL    |       |
+| S_NATIONKEY | int(11)       | NO   | MUL | NULL    |       |
+| S_PHONE     | char(15)      | NO   |     | NULL    |       |
+| S_ACCTBAL   | decimal(15,2) | NO   |     | NULL    |       |
+| S_COMMENT   | varchar(101)  | NO   |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+**Begin Script File**
+CREATE TABLE customer
+(C_CUSTKEY int(11) NOT NULL, 
+C_NAME varchar(25) NOT NULL, 
+C_ADDRESS varchar(40) NOT NULL, 
+C_NATIONKEY int(11) NOT NULL, 
+C_PHONE char(15) NOT NULL, 
+C_ACCTBAL decimal(15,2) NOT NULL, 
+C_MKTSEGMENT char(10) NOT NULL, 
+C_COMMENT varchar(117) NOT NULL,
+PRIMARY KEY (C_CUSTKEY));
 
 CREATE TABLE lineitem (
 L_ORDERKEY int(11) NOT NULL,
@@ -68,41 +156,12 @@ L_SHIPMODE CHAR(10) NOT NULL,
 L_COMMENT VARCHAR(44) NOT NULL,
 PRIMARY KEY (L_ORDERKEY, L_LINENUMBER));
 
-LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINATED BY '|';
-
-nation
-+-------------+--------------+------+-----+---------+-------+
-| Field       | Type         | Null | Key | Default | Extra |
-+-------------+--------------+------+-----+---------+-------+
-| N_NATIONKEY | int(11)      | NO   |     | NULL    |       |
-| N_NAME      | char(25)     | NO   |     | NULL    |       |
-| N_REGIONKEY | int(11)      | NO   |     | NULL    |       |
-| N_COMMENT   | varchar(152) | YES  |     | NULL    |       |
-+-------------+--------------+------+-----+---------+-------+
-
 create table nation (
 N_NATIONKEY INT(11) NOT NULL,
 N_NAME CHAR(25) NOT NULL,
 N_REGIONKEY INT(11) NOT NULL,
 N_COMMENT VARCHAR(152),
 PRIMARY KEY (N_NATIONKEY));
-
-LOAD DATA LOCAL INFILE 'nation.tbl' INTO TABLE nation FIELDS TERMINATED BY '|';
-
-orders
-+-----------------+---------------+------+-----+---------+-------+
-| Field           | Type          | Null | Key | Default | Extra |
-+-----------------+---------------+------+-----+---------+-------+
-| O_ORDERKEY      | int(11)       | NO   |     | NULL    |       |
-| O_CUSTKEY       | int(11)       | NO   |     | NULL    |       |
-| O_ORDERSTATUS   | char(1)       | NO   |     | NULL    |       |
-| O_TOTALPRICE    | decimal(15,2) | NO   |     | NULL    |       |
-| O_ORDERDATE     | date          | NO   |     | NULL    |       |
-| O_ORDERPRIORITY | char(15)      | NO   |     | NULL    |       |
-| O_CLERK         | char(15)      | NO   |     | NULL    |       |
-| O_SHIPPRIORITY  | int(11)       | NO   |     | NULL    |       |
-| O_COMMENT       | varchar(79)   | NO   |     | NULL    |       |
-+-----------------+---------------+------+-----+---------+-------+
 
 create table orders (
 O_ORDERKEY INT(11) NOT NULL,
@@ -116,23 +175,6 @@ O_SHIPPRIORITY INT(11) NOT NULL,
 O_COMMENT VARCHAR(79) NOT NULL,
 PRIMARY KEY (O_ORDERKEY));
 
-LOAD DATA LOCAL INFILE 'orders.tbl' INTO TABLE orders FIELDS TERMINATED BY '|';
-
-part
-+---------------+---------------+------+-----+---------+-------+
-| Field         | Type          | Null | Key | Default | Extra |
-+---------------+---------------+------+-----+---------+-------+
-| P_PARTKEY     | int(11)       | NO   |     | NULL    |       |
-| P_NAME        | varchar(55)   | NO   |     | NULL    |       |
-| P_MFGR        | char(25)      | NO   |     | NULL    |       |
-| P_BRAND       | char(10)      | NO   |     | NULL    |       |
-| P_TYPE        | varchar(25)   | NO   |     | NULL    |       |
-| P_SIZE        | int(11)       | NO   |     | NULL    |       |
-| P_CONTAINER   | char(10)      | NO   |     | NULL    |       |
-| P_RETAILPRICE | decimal(15,2) | NO   |     | NULL    |       |
-| P_COMMENT     | varchar(23)   | NO   |     | NULL    |       |
-+---------------+---------------+------+-----+---------+-------+
-
 create table part (
 P_PARTKEY INT(11) NOT NULL,
 P_NAME VARCHAR(55) NOT NULL,
@@ -145,20 +187,6 @@ P_RETAILPRICE DECIMAL(15,2) NOT NULL,
 P_COMMENT VARCHAR(23) NOT NULL,
 Primary Key (P_PARTKEY));
 
-LOAD DATA LOCAL INFILE 'part.tbl' INTO TABLE part FIELDS TERMINATED BY '|';
-
-
-partsupp
-+---------------+---------------+------+-----+---------+-------+
-| Field         | Type          | Null | Key | Default | Extra |
-+---------------+---------------+------+-----+---------+-------+
-| PS_PARTKEY    | int(11)       | NO   |     | NULL    |       |
-| PS_SUPPKEY    | int(11)       | NO   |     | NULL    |       |
-| PS_AVAILQTY   | int(11)       | NO   |     | NULL    |       |
-| PS_SUPPLYCOST | decimal(15,2) | NO   |     | NULL    |       |
-| PS_COMMENT    | varchar(199)  | NO   |     | NULL    |       |
-+---------------+---------------+------+-----+---------+-------+
-
 create table partsupp (
 PS_PARTKEY INT(11) NOT NULL,
 PS_SUPPKEY INT(11) NOT NULL,
@@ -167,38 +195,11 @@ PS_SUPPLYCOST DECIMAL(15,2) NOT NULL,
 PS_COMMENT VARCHAR(199) NOT NULL,
 PRIMARY KEY (PS_PARTKEY, PS_SUPPKEY));
 
-LOAD DATA LOCAL INFILE 'partsupp.tbl' INTO TABLE partsupp FIELDS TERMINATED BY '|';
-
-region
-+-------------+--------------+------+-----+---------+-------+
-| Field       | Type         | Null | Key | Default | Extra |
-+-------------+--------------+------+-----+---------+-------+
-| R_REGIONKEY | int(11)      | NO   |     | NULL    |       |
-| R_NAME      | char(25)     | NO   |     | NULL    |       |
-| R_COMMENT   | varchar(152) | YES  |     | NULL    |       |
-+-------------+--------------+------+-----+---------+-------+
-
 create table region (
 R_REGIONKEY INT(11) NOT NULL,
 R_NAME CHAR(25) NOT NULL,
 R_COMMENT VARCHAR(152),
 PRIMARY KEY (R_REGIONKEY));
-
-LOAD DATA LOCAL INFILE 'region.tbl' INTO TABLE region FIELDS TERMINATED BY '|';
-
-
-supplier
-+-------------+---------------+------+-----+---------+-------+
-| Field       | Type          | Null | Key | Default | Extra |
-+-------------+---------------+------+-----+---------+-------+
-| S_SUPPKEY   | int(11)       | NO   |     | NULL    |       |
-| S_NAME      | char(25)      | NO   |     | NULL    |       |
-| S_ADDRESS   | varchar(40)   | NO   |     | NULL    |       |
-| S_NATIONKEY | int(11)       | NO   |     | NULL    |       |
-| S_PHONE     | char(15)      | NO   |     | NULL    |       |
-| S_ACCTBAL   | decimal(15,2) | NO   |     | NULL    |       |
-| S_COMMENT   | varchar(101)  | NO   |     | NULL    |       |
-+-------------+---------------+------+-----+---------+-------+
 
 create table supplier (
 S_SUPPKEY INT(11) NOT NULL,
@@ -210,5 +211,24 @@ S_ACCTBAL DECIMAL(15,2) NOT NULL,
 S_COMMENT VARCHAR(101) NOT NULL,
 PRIMARY KEY (S_SUPPKEY));
 
-LOAD DATA LOCAL INFILE 'supplier.tbl' INTO TABLE supplier FIELDS TERMINATED BY '|';
+ALTER TABLE supplier ADD FOREIGN KEY (S_NATIONKEY) REFERENCES nation (N_NATIONKEY);
+ALTER TABLE partsupp ADD FOREIGN KEY (PS_PARTKEY) REFERENCES part (P_PARTKEY);
+ALTER TABLE partsupp ADD FOREIGN KEY (PS_SUPPKEY) REFERENCES supplier (S_SUPPKEY);
+ALTER TABLE customer ADD FOREIGN KEY (C_NATIONKEY) REFERENCES nation (N_NATIONKEY);
+ALTER TABLE orders ADD FOREIGN KEY (O_CUSTKEY) REFERENCES customer (C_CUSTKEY);
+ALTER TABLE lineitem ADD FOREIGN KEY (L_ORDERKEY) REFERENCES orders (O_ORDERKEY);
+ALTER TABLE lineitem ADD FOREIGN KEY (L_PARTKEY) REFERENCES part (P_PARTKEY);
+ALTER TABLE lineitem ADD FOREIGN KEY (L_SUPPKEY) REFERENCES supplier (S_SUPPKEY);
+ALTER TABLE nation ADD FOREIGN KEY (N_REGIONKEY) REFERENCES region (R_REGIONKEY);
 
+
+LOAD DATA LOCAL INFILE 'supplier.tbl' INTO TABLE supplier FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'region.tbl' INTO TABLE region FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'partsupp.tbl' INTO TABLE partsupp FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'part.tbl' INTO TABLE part FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'orders.tbl' INTO TABLE orders FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'nation.tbl' INTO TABLE nation FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'nation.tbl' INTO TABLE nation FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'customer.tbl' INTO TABLE customer FIELDS TERMINATED BY '|';
+
+**End Script File**
