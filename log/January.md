@@ -46,4 +46,8 @@ Also looked at the queries with qgen for testing within the ~/tpch/dbgen/queries
 
 Attempted proper benchmarking, unsure about results: Opened Issue #2 Memory == MYISAM Performance
 
+**January 28, 2017**
+
+Solved Issue: Memory database and MYISAM seemed to be running at equivalent times. Found that the table setups were missing Primary and Foreign Keys when testing against the queries. The addition of the keys have improved the performance drastically and benchmarks now run as expected.
+
 **End of Log File**
