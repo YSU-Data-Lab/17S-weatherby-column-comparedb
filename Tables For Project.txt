@@ -16,6 +16,8 @@ show tables;
 
 show columns from customer; show columns from lineitem; show columns from nation; show columns from orders; show columns from part; show columns from partsupp; show columns from region; show columns from supplier;
 
+drop table supplier; drop table region; drop table partsupp; drop table part; drop table orders; drop table nation; drop table customer; drop table lineitem;
+
 +--------------+---------------+------+-----+---------+-------+
 | Field        | Type          | Null | Key | Default | Extra |
 +--------------+---------------+------+-----+---------+-------+
@@ -228,7 +230,7 @@ LOAD DATA LOCAL INFILE 'partsupp.tbl' INTO TABLE partsupp FIELDS TERMINATED BY '
 LOAD DATA LOCAL INFILE 'part.tbl' INTO TABLE part FIELDS TERMINATED BY '|';
 LOAD DATA LOCAL INFILE 'orders.tbl' INTO TABLE orders FIELDS TERMINATED BY '|';
 LOAD DATA LOCAL INFILE 'nation.tbl' INTO TABLE nation FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE 'nation.tbl' INTO TABLE nation FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINATED BY '|';
 LOAD DATA LOCAL INFILE 'customer.tbl' INTO TABLE customer FIELDS TERMINATED BY '|';
 
 **End Script File**
