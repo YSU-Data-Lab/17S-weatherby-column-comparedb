@@ -15,14 +15,14 @@ Dr. Yu has provided me with commands to get into the MySQL (Server?) for now. I 
 
 **January 24, 2017**
 
-**12:00 PM to 2:30 PM** Today I worked on trying to generate data. I ran into some difficulty for a few reasons: One being unfamiliality with Ubunutu. I didn't realize that I was to be typing a very specific command "./dbgen -s 1" into the directory where dbgen was sitting. I've just been trying to issue the command "dbgen -s" which only results in a strange file named "output.ldif" after working past this complication I attempted to re-familiarize myself with mySQL only to run into trouble when trying to issue the command "create database tpch_memory" and I am attempting to follow up on this. I am not meeting my intended personal progress on this project and plan to work more on it Thursday this week.
+**12:00 PM to 2:30 PM** Today I worked on trying to generate data. I ran into some difficulty for a few reasons: One being unfamiliality with Ubunutu. I didn't realize that I was to be typing a very specific command "./dbgen -s 1" into the directory where dbgen was sitting. I've just been trying to issue the command "dbgen -s" which only results in a strange file named "output.ldif" after working past this complication I attempted to re-familiarize myself with MySQL only to run into trouble when trying to issue the command "create database tpch_memory" and I am attempting to follow up on this. I am not meeting my intended personal progress on this project and plan to work more on it Thursday this week.
 
-Other notes: Moved all ".tbl" files to my directory under "~weatherby/testdata" I anticipate to test 1GB against memory in mySQL and MonetDB. Larger sets of data should be easier to distinguish a proper benchmark.
+Other notes: Moved all ".tbl" files to my directory under "~weatherby/testdata" I anticipate to test 1GB against memory in MySQL and MonetDB. Larger sets of data should be easier to distinguish a proper benchmark.
 Commands to remember: SET default_storage_engine=MEMORY;
 
 **January 26, 2017**
 
-**1:30 PM to 3:00 PM** Today I have learned how to import data to mySQL from the .TBL files. I have written all the script and laid it out in a text file on the main branch of this repository. I am running into this issues with this now:
+**1:30 PM to 3:00 PM** Today I have learned how to import data to MySQL from the .TBL files. I have written all the script and laid it out in a text file on the main branch of this repository. I am running into this issues with this now:
 
 mysql> LOAD DATA LOCAL INFILE 'lineitem.tbl' INTO TABLE lineitem FIELDS TERMINATED BY '|';
 
@@ -32,7 +32,7 @@ Will discuss Tuesday about what I'm running into here and how to remedy it. I ha
 
 **January 27, 2017**
 
-**12:15 PM to 1:00 PM** Remedied issue with mySQL and the memory engine limitation with the following commands:
+**12:15 PM to 1:00 PM** Remedied issue with MySQL and the memory engine limitation with the following commands:
 
 SET GLOBAL tmp_table_size = 1024 * 1024 * 1024 * 2;
 SET GLOBAL max_heap_table_size = 1024 * 1024 * 1024 * 2;
@@ -51,5 +51,13 @@ Attempted proper benchmarking, unsure about results: Opened Issue #2 Memory == M
 Solved Issue: Memory database and MYISAM seemed to be running at equivalent times. Found that the table setups were missing Primary and Foreign Keys when testing against the queries. The addition of the keys have improved the performance drastically and benchmarks now run as expected.
 
 This was the final hurdle of the first phase of my project.
+
+**January 30, 2017**
+
+Double checked everything with MySQL to make sure I was running the benchmarks properly. Everything for the MySQL side looks good to go. Inadvertendly when testing if the memory engine was working I did end up with MYISAM benchmarks as well. They were simple enough to perform. I believe that with missing Primary and Foriegn Keys that Aikin's project is largely invalid. The times in MySQL for Aikins were pretty long just for 100MB of data. My queries were ran using 1GB of data and ran under ten seconds for the MYISAM engine and half that for Memory engine. I think it's safe to say that the original benchmark is not at all accurate.
+
+The mistake: I made the mistake of looking at Aikins table schema instead of referring to the official documentation at first. I was pretty confused as to why the times were so long when I knew that the benchmarks should provide me a reasonable time. Originally, just for Aikins Query 1, I calculated that it would take 30 seconds for the initial 100MB of data multiplied by 5 for every +100MB of data or (30)x(5)^(n-1) where n is every 100MB of data, and I got this based on the results of 3 queries at 100MB, 200MB and 300MB. 
+
+Benchmark data saved accordingly.
 
 **End of Log File**
