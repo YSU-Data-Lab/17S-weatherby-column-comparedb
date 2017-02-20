@@ -1,6 +1,6 @@
 **February Preface**
 
-Became ill with a nasty sinus infection for the first portion of February. I don't remember the entirity of my progress from January 30, 2017 to February 20, 2017. I estimate that being ill has set me back aproximately two weeks worth. I will be working on this project a lot more than originally allotted to makeup for that lost time; I am highly optimistic that I can accomplish these tasks by the original deadline of March 7, 2017 still.
+Became ill with a nasty sinus infection for the first portion of February. I don't remember the entirity of my progress from January 30, 2017 to February 20, 2017. I estimate that being ill has set me back aproximately two weeks worth. I will be working on this project a lot more than originally allotted to makeup for that lost time; I am highly optimistic that I can accomplish these tasks by the original deadline of March 7, 2017.
 
 **February 20th, 2017** 
 
