@@ -10,6 +10,6 @@ Benchmark Completion:
 
 [X] MySQL
 
-[ ] MonetDB
+[X] MonetDB
 
 [ ] Cassandra
