@@ -4,12 +4,10 @@ Senior Project Spring 2017
 
 This project aims to compare and benchmark row-store databases against column-store databases.
 
-Programs to be compared: MySQL (Memory), MonetDB, and Cassandra.
+Programs to be compared: MySQL (MYISAM), MySQL (Memory), and MonetDB (Row-Store).
 
 Benchmark Completion:
 
-[X] MySQL
-
+[X] MySQL (MYISAM)
+[X] MySQL (Memory)
 [X] MonetDB
-
-[ ] Cassandra
