@@ -9,5 +9,7 @@ Programs to be compared: MySQL (MYISAM), MySQL (Memory), and MonetDB (Row-Store)
 Benchmark Completion:
 
 [X] MySQL (MYISAM)
+
 [X] MySQL (Memory)
+
 [X] MonetDB
